@@ -4,6 +4,8 @@
 
 <p align="center">🚀 React component that renders a Terminal 🖥</p>
 
+<h3>Forked for REPL line-by-line evaluation with out distinct, known commands</h3>
+
 <p align="center">
   <a href="https://github.com/bony2023/react-terminal/actions?query=Build+and+Test"><img src="https://github.com/bony2023/react-terminal/workflows/Build%20and%20Test/badge.svg" data-canonical-src="https://github.com/bony2023/react-terminal/workflows/Build%20and%20Test/badge.svg"/></a>
   <a href="https://www.npmjs.com/package/react-terminal"><img src="https://img.shields.io/npm/v/react-terminal/latest" data-canonical-src="https://img.shields.io/npm/v/react-terminal/latest"/></a>
