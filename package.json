@@ -44,7 +44,7 @@
     "codecov": "^3.6.1",
     "cross-env": "^6.0.3",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-adapter-react-16": "^1.15.3",
     "enzyme-to-json": "^3.4.3",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
@@ -102,6 +102,8 @@
   },
   "dependencies": {
     "prop-types": "^15.7.2",
-    "react-device-detect": "^1.11.14"
+    "react": "^16.13.1",
+    "react-device-detect": "^1.11.14",
+    "react-dom": "^16.13.1"
   }
 }

@@ -37,7 +37,7 @@ export default function Editor(props: any) {
 
   return (
     <div ref={wrapperRef} className={style.editor} style={{ background: themeStyles.themeBGColor }}>
-      {welcomeMessage}
+      {welcomeMessage}<br/>
       {bufferedContent}
       {currentLine}
     </div>

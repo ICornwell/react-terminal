@@ -113,6 +113,13 @@ export const useBufferedContent = (
             } else {
               output = executor;
             }
+          } else if (commands['__eval']) {
+            const executor = commands['__eval']
+            if (typeof executor === "function") {
+              output = await executor(text);
+            } else {
+              output = executor;
+            }
           } else if (typeof errorMessage === "function") {
             output = await errorMessage(commandArguments);
           } else {
