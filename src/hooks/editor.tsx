@@ -41,6 +41,7 @@ export const useEditorInput = (
     if (eventKey === "Backspace") {
       nextInput = editorInput.slice(0, -1);
     } else if (eventKey === "Delete") {
+      nextInput = editorInput;
       afterInput = editorInputAfter.slice(1);
     } else if (eventKey === "ArrowUp") {
       nextInput = getPreviousCommand();
