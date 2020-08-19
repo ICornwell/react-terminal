@@ -36,6 +36,7 @@ exports[`Terminal renders correctly 1`] = `
       }
     >
       
+      <br />
       
       <span
         style={
@@ -65,6 +66,11 @@ exports[`Terminal renders correctly 1`] = `
               }
             }
           />
+        </span>
+        <span
+          className="preWhiteSpace"
+        >
+          
         </span>
       </div>
     </div>

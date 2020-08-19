@@ -3,7 +3,7 @@ import postcss from "rollup-plugin-postcss";
 import { terser } from "rollup-plugin-terser";
 import pkg from "./package.json";
 
-export default {
+export default [{
   input: "src/index.tsx",
   output: [
     {
@@ -34,4 +34,5 @@ export default {
     }),
     process.env.NODE_ENV === "production" ? terser() : null
   ]
-};
+}];
+

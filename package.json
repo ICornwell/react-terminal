@@ -6,6 +6,7 @@
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "start": "./node_modules/.bin/cross-env NODE_ENV=test rollup --config rollup.config.example.config.js --dir ./exampleDist",
     "build": "./node_modules/.bin/cross-env NODE_ENV=production rollup -c",
     "watch": "rollup -cw",
     "test": "jest"
@@ -65,7 +66,7 @@
     "ts-jest": "^24.2.0",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.4",
-    "webpack": "^4.41.5",
+    "webpack": "4.42.0",   
     "webpack-cli": "^3.3.10"
   },
   "peerDependencies": {
@@ -104,6 +105,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-device-detect": "^1.11.14",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "webpack-dev-server": "^3.11.0"
   }
 }

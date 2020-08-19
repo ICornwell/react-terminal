@@ -10,6 +10,7 @@ exports[`Editor Editor renders correctly 1`] = `
   }
 >
   
+  <br />
   
   <span
     style={
@@ -23,6 +24,11 @@ exports[`Editor Editor renders correctly 1`] = `
   <div
     className="lineText"
   >
+    <span
+      className="preWhiteSpace"
+    >
+      
+    </span>
     <span
       className="preWhiteSpace"
     >
