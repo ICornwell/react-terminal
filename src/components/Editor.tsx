@@ -10,9 +10,10 @@ import {
 
 export default function Editor(props: any) {
   const wrapperRef = React.useRef(null);
+  const lateResponseId = React.useRef(undefined)
   const style = React.useContext(StyleContext);
   const themeStyles = React.useContext(ThemeContext);
-  const { bufferedContent } = React.useContext(TerminalContext);
+  const { bufferedContent, setBufferedContent } = React.useContext(TerminalContext);
 
   useScrollToBottom(bufferedContent, wrapperRef);
 
@@ -23,6 +24,7 @@ export default function Editor(props: any) {
     prompt,
     commands,
     welcomeMessage,
+    lateResponse,
     errorMessage
   } = props;
 
@@ -34,6 +36,24 @@ export default function Editor(props: any) {
     errorMessage, 
     enableInput //enableInput prop as a parameter
   );
+
+  
+  if (lateResponse && lateResponse.id 
+    && lateResponse.id !== lateResponseId.current
+    && lateResponse.text) {
+    lateResponseId.current = lateResponse.id
+   
+    setBufferedContent(
+      <>
+        {bufferedContent}
+        <span>
+          <br />
+          {lateResponse.text.split('\n').map(line=> (<>{line}<br/></> ))}
+        </span>
+        <br />
+      </>
+    )
+  }
 
   return (
     <div ref={wrapperRef} className={style.editor} style={{ background: themeStyles.themeBGColor }}>

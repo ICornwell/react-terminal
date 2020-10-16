@@ -80,6 +80,23 @@ export const useEditorInput = (
   });
 };
 
+function extendBufferedContent(newText, bufferedContent, themeStyles, style, currentText) {
+  return (
+    <>
+      {bufferedContent}
+      <span style={{ color: themeStyles.themePromptColor }}>{prompt}</span>
+      <span className={`${style.lineText} ${style.preWhiteSpace}`}>{currentText}</span>
+      {newText ? (
+        <span>
+          <br />
+          {newText.split('\n').map(line=> (<>{line}<br/></> ))}
+        </span>
+      ) : null}
+      <br />
+    </>
+  )
+}
+
 export const useBufferedContent = (
   processCurrentLine: any,
   setProcessCurrentLine: any,
@@ -148,20 +165,8 @@ export const useBufferedContent = (
           }
         }
 
-        const nextBufferedContent = (
-          <>
-            {bufferedContent}
-            <span style={{ color: themeStyles.themePromptColor }}>{prompt}</span>
-            <span className={`${style.lineText} ${style.preWhiteSpace}`}>{currentText}</span>
-            {output ? (
-              <span>
-                <br />
-                {output.split('\n').map(line=> (<>{line}<br/></> ))}
-              </span>
-            ) : null}
-            <br />
-          </>
-        );
+        const nextBufferedContent = extendBufferedContent(output, bufferedContent,
+          themeStyles, style, currentText);
 
         setBufferedContent(nextBufferedContent);
         setProcessCurrentLine(false);

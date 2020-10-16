@@ -26,6 +26,7 @@ export default function Terminal(props: any) {
     prompt,
     commands,
     welcomeMessage,
+    lateResponse,
     errorMessage,
     enableInput //enableInput prop
   } = props;
@@ -48,6 +49,7 @@ export default function Terminal(props: any) {
           prompt={prompt}
           commands={commands}
           welcomeMessage={welcomeMessage}
+          lateResponse={lateResponse}
           errorMessage={errorMessage}
           enableInput={enableInput} //enableInput prop
         />

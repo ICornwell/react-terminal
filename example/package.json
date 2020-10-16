@@ -17,11 +17,13 @@
     "@types/node": "link:../node_modules/@types/node",
     "@types/react": "link:../node_modules/@types/react",
     "@types/react-dom": "link:../node_modules/@types/react-dom",
+    "@types/uuid": "^8.3.0",
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
     "react-scripts": "3.4.3",
+    "react-terminal": "link:..",
     "typescript": "link:../node_modules/typescript",
-    "react-terminal": "link:.."
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "@babel/plugin-syntax-object-rest-spread": "^7.8.3"
