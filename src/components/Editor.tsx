@@ -38,6 +38,8 @@ export default function Editor(props: any) {
     enableInput //enableInput prop as a parameter
   );
 
+  console.log(`lateResponse: ${lateResponse}, id: ${lateResponse?lateResponse.id:'err'}, text: ${lateResponse?lateResponse.text:'err'}`)
+
   
   if (lateResponse && lateResponse.id 
     && lateResponse.id !== lateResponseId.current
