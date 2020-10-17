@@ -38,7 +38,7 @@ export default function Editor(props: any) {
     enableInput //enableInput prop as a parameter
   );
 
-  console.log(`lateResponse: ${lateResponse}, id: ${lateResponse?lateResponse.id:'err'}, text: ${lateResponse?lateResponse.text:'err'}`)
+  // console.log(`lateResponse: ${lateResponse}, id: ${lateResponse?lateResponse.id:'err'}, text: ${lateResponse?lateResponse.text:'err'}`)
 
   
   if (lateResponse && lateResponse.id 
@@ -46,7 +46,7 @@ export default function Editor(props: any) {
     && lateResponse.text) {
     lateResponseId.current = lateResponse.id
    
-      console.log(`Adding late content: ${lateResponse.text}`)
+ //     console.log(`Adding late content: ${lateResponse.text}`)
 
     setBufferedContent(
       <>
