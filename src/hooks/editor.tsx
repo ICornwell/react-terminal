@@ -80,7 +80,7 @@ export const useEditorInput = (
   });
 };
 
-function extendBufferedContent(newText, bufferedContent, themeStyles, style, currentText) {
+function extendBufferedContent(newText, bufferedContent, themeStyles, style, prompt, currentText) {
   return (
     <>
       {bufferedContent}
@@ -92,7 +92,6 @@ function extendBufferedContent(newText, bufferedContent, themeStyles, style, cur
           {newText.split('\n').map(line=> (<>{line}<br/></> ))}
         </span>
       ) : null}
-      <br />
     </>
   )
 }
@@ -166,7 +165,7 @@ export const useBufferedContent = (
         }
 
         const nextBufferedContent = extendBufferedContent(output, bufferedContent,
-          themeStyles, style, currentText);
+          themeStyles, style, prompt, currentText);
 
         setBufferedContent(nextBufferedContent);
         setProcessCurrentLine(false);

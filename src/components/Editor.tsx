@@ -47,10 +47,9 @@ export default function Editor(props: any) {
       <>
         {bufferedContent}
         <span>
-          <br />
           {lateResponse.text.split('\n').map(line=> (<>{line}<br/></> ))}
         </span>
-        <br />
+        
       </>
     )
   }
