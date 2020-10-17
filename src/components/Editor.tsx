@@ -7,6 +7,7 @@ import {
   useCurrentLine,
   useScrollToBottom,
 } from "../hooks/editor";
+import { ConsoleView } from "react-device-detect";
 
 export default function Editor(props: any) {
   const wrapperRef = React.useRef(null);
@@ -43,6 +44,8 @@ export default function Editor(props: any) {
     && lateResponse.text) {
     lateResponseId.current = lateResponse.id
    
+      console.log(`Adding late content: ${lateResponse.text}`)
+
     setBufferedContent(
       <>
         {bufferedContent}
