@@ -31,6 +31,8 @@ export default function Terminal(props: any) {
     enableInput //enableInput prop
   } = props;
 
+  console.log('term redraw')
+
   return (
     <div
       ref={wrapperRef}

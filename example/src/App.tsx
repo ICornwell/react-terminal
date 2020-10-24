@@ -6,13 +6,27 @@ import './index.css'
 import { v4 as uuidV4} from 'uuid'
 
 const App = () => {
-  const [ refreshToggle, setRefreshToggle] = useState(false)
+  const [ , setRefreshToggle] = useState("")
 
   const lateContent = useRef({id:undefined, text:null})
 
-  function setLateContent(text: any) {
-    lateContent.current = text
-    setRefreshToggle(!refreshToggle)
+  function setLateContent(content: any) {
+    if (content.text === "ask question")
+      addQuestionToContent(content)
+    lateContent.current = content
+    setRefreshToggle(uuidV4())
+
+  }
+
+  function addQuestionToContent(content: any) {
+    const question = {
+      text: 'Do you want to answer this question?',
+      answers : [
+        {text:'No', instruction: 'You answered negatively :('},
+        {text:'Yes', instruction: 'You answered positively :)'}
+      ]
+    }
+    content.question = question
   }
 
 
@@ -20,21 +34,15 @@ const App = () => {
     setTimeout(()=>{setLateContent({id: uuidV4(), text:text})},1000)
   }
 
-  function useAndClearLateContent() {
-    const result = lateContent.current
-    lateContent.current = {id:undefined, text:null}
-    return result
-  }
-
   return <div>
     <TerminalContextProvider >
       <ReactTerminal theme='dark'
-                        showControlButtons='False'
+                        showControlButtons={false}
                         prompt='->'
                         welcomeMessage="Game Terminal"
-                        lateResponse={useAndClearLateContent()}
+                        lateResponse={lateContent.current}
                         errorMessage="Unknown command, use '?' to evaluate expressions."
-                        commands={{ '__eval':  (expr:string) => { lateReply(expr); return'you typed'+(expr) }}}>
+                        commands={{ '__eval':  (expr:string) => { lateReply(expr); return'You typed: '+(expr) }}}>
       </ReactTerminal>
       </TerminalContextProvider>
     </div>

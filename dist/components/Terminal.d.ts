@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import PropTypes from "prop-types";
 declare function Terminal(props: any): JSX.Element;
 declare namespace Terminal {

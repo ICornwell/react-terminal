@@ -1,4 +1,3 @@
-/// <reference types="react" />
 export declare function ReactTerminal(props: any): any;
 export declare const TerminalContextProvider: (props: any) => JSX.Element;
 declare const _default: {

@@ -9,8 +9,11 @@ import {
 } from "../hooks/editor";
 import { ConsoleView } from "react-device-detect";
 
+import exec from "../common/executor"
+
 export default function Editor(props: any) {
   const wrapperRef = React.useRef(null);
+  const currentQuestion = React.useRef(undefined);
   const lateResponseId = React.useRef(undefined)
   const style = React.useContext(StyleContext);
   const themeStyles = React.useContext(ThemeContext);
@@ -29,35 +32,53 @@ export default function Editor(props: any) {
     errorMessage
   } = props;
 
+  const newLateResponse = (lateResponse && lateResponse.id 
+    && lateResponse.id !== lateResponseId.current)
+
+  if (newLateResponse)
+    lateResponseId.current = lateResponse.id
+
+  if (newLateResponse && lateResponse.question)
+    currentQuestion.current = lateResponse.question
+
   const currentLine = useCurrentLine(
     caret,  // useCurrentLine takes both props as parameters
     consoleFocused,
     prompt,
     commands,
     errorMessage, 
-    enableInput //enableInput prop as a parameter
+    enableInput,
+    currentQuestion.current //enableInput prop as a parameter
   );
 
-  // console.log(`lateResponse: ${lateResponse}, id: ${lateResponse?lateResponse.id:'err'}, text: ${lateResponse?lateResponse.text:'err'}`)
+  console.log(`lateResponse: ${lateResponse}, id: ${lateResponse?lateResponse.id:'err'}, text: ${lateResponse?lateResponse.text:'err'}`)
 
   
-  if (lateResponse && lateResponse.id 
-    && lateResponse.id !== lateResponseId.current
-    && lateResponse.text) {
-    lateResponseId.current = lateResponse.id
-   
- //     console.log(`Adding late content: ${lateResponse.text}`)
-
+  if (newLateResponse && lateResponse.text) 
     setBufferedContent(
       <>
         {bufferedContent}
         <span>
           {lateResponse.text.split('\n').map(line=> (<>{line}<br/></> ))}
+          {lateResponse.question ?
+            <span>
+              {lateResponse.question.text}
+              <ul>
+                {lateResponse.question.answers.map((a, i)=>{
+                  return <li>
+                    <input type="radio" key={'ans'+i} id={'ans'+i} name='answer' value={a.instruction} 
+                      onChange={()=>exec(commands, a.text, errorMessage, lateResponse.question)}/>
+                    <label htmlFor={'ans'+i}>{a.text}</label>
+                  </li>
+                })}
+              </ul>
+            </span>  
+          : null}
         </span>
         
       </>
     )
-  }
+  
 
   return (
     <div ref={wrapperRef} className={style.editor} style={{ background: themeStyles.themeBGColor }}>

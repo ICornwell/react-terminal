@@ -18,13 +18,13 @@ exports[`Terminal renders correctly 1`] = `
       className="controls"
     >
       <div
-        className="consoleCtrl close"
+        className="consoleCtrl "
       />
       <div
-        className="consoleCtrl minimize"
+        className="consoleCtrl "
       />
       <div
-        className="consoleCtrl maximize"
+        className="consoleCtrl "
       />
     </div>
     <div

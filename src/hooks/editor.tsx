@@ -5,6 +5,8 @@ import { StyleContext } from "../contexts/StyleContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { TerminalContext } from "../contexts/TerminalContext";
 
+import exec from "../common/executor"
+
 export const useEditorInput = (
   consoleFocused: boolean,
   editorInput: string,
@@ -55,7 +57,7 @@ export const useEditorInput = (
       afterInput = editorInputAfter.slice(1);
     }  else if (eventKey === "End") {
       nextInput = editorInput+editorInputAfter;
-      afterInput = '';''
+      afterInput = '';
     }  else if (eventKey === "Home") {
       nextInput = '';
       afterInput = editorInput+editorInputAfter
@@ -103,7 +105,8 @@ export const useBufferedContent = (
   currentText: any,
   setCurrentText: any,
   commands: any,
-  errorMessage: any
+  errorMessage: any,
+  currentQuestion: any
 ) => {
   const { bufferedContent, setBufferedContent } = React.useContext(TerminalContext);
   const style = React.useContext(StyleContext);
@@ -117,9 +120,8 @@ export const useBufferedContent = (
 
       const processCommand = async (text: string) => {
 
-        const [command, ...rest] = text.trim().split(" ");
-        let output = "";
-
+        const [command] = text ? text.trim().split(" "): [];
+        
         if(command === "clear") {
           setBufferedContent("");
           setCurrentText("");
@@ -138,33 +140,11 @@ export const useBufferedContent = (
         setBufferedContent(waiting);
         setCurrentText("");
 
-        
-        if (text) {
-          const commandArguments = rest.join(" ");
+        const output = (text) ? await exec(commands, text, errorMessage, currentQuestion) : ""
 
-          if (command && commands[command]) {
-            const executor = commands[command];
+        console.log(`output: ${output}, type:${typeof output}`)
 
-            if (typeof executor === "function") {
-              output = await executor(commandArguments);
-            } else {
-              output = executor;
-            }
-          } else if (commands['__eval']) {
-            const executor = commands['__eval']
-            if (typeof executor === "function") {
-              output = await executor(text);
-            } else {
-              output = executor;
-            }
-          } else if (typeof errorMessage === "function") {
-            output = await errorMessage(commandArguments);
-          } else {
-            output = errorMessage;
-          }
-        }
-
-        const nextBufferedContent = extendBufferedContent(output, bufferedContent,
+        const nextBufferedContent = extendBufferedContent(output? output: "", bufferedContent,
           themeStyles, style, prompt, currentText);
 
         setBufferedContent(nextBufferedContent);
@@ -183,7 +163,8 @@ export const useCurrentLine = (
   prompt: string,
   commands: any,
   errorMessage: any,
-  enableInput: boolean  //enableInput parameter
+  enableInput: boolean,
+  currentQuestion: any  //enableInput parameter
 ) => {
   const style = React.useContext(StyleContext);
   const themeStyles = React.useContext(ThemeContext);
@@ -276,7 +257,8 @@ export const useCurrentLine = (
     editorInput,
     setEditorInput,
     commands,
-    errorMessage
+    errorMessage,
+    currentQuestion
   );
 
   return currentLine;

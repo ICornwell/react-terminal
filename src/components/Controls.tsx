@@ -7,11 +7,14 @@ export default function Controls(props: any) {
   const { controlButtonLabels } = props;
   const { showControlButtons } = props;
 
+  const consoleCtrl : string = style ? style['consoleCtrl']:''
+  const getButtonLabel : (arg0: string) => string = (label:string) => { if (style!==null) return ''; else return ''}
+
   const controlButtons = showControlButtons
     ? controlButtonLabels.map((buttonLabel: string) => (
         <div
           key={buttonLabel}
-          className={`${style.consoleCtrl} ${style[buttonLabel]}`}
+          className={`${consoleCtrl} ${getButtonLabel(buttonLabel)}`}
         />
       ))
     : null;
